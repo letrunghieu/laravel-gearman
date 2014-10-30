@@ -17,6 +17,7 @@ class GearmanConnector implements ConnectorInterface {
         $client->addServer($config['host'], (int) $config['port']);
         $worker = new GearmanWorker;
         $worker->addServer($config['host'], (int) $config['port']);
+        $worker->setId(gethostname() . "-" . $config['queue']);
         return new GearmanQueue ($client, $worker, $config['queue']);
     }
 }
